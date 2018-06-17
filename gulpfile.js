@@ -2,6 +2,7 @@
  const imagemin = require('gulp-imagemin');
  const uglify = require('gulp-uglify');
  const sass = require('gulp-sass');
+ const concat = require('gulp-concat');
 
  /*
  --- TOP LEVEL FUNCTIONS ---
@@ -33,12 +34,12 @@ gulp.task('imageMin', () =>
         .pipe(gulp.dest('dist/images'))
 );
 
-// minify js
-gulp.task('minify', () => {
-  gulp.src('src/js/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
-});
+// minify js -- this part is done by concat and uglify
+// gulp.task('minify', () => {
+//   gulp.src('src/js/*.js')
+//     .pipe(uglify())
+//     .pipe(gulp.dest('dist/js'));
+// });
 
 // compile sass
 gulp.task('sass', () => {
@@ -47,6 +48,14 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('dist/css'));
 });
 
+// script concat
+gulp.task('scripts', () => {
+  gulp.src('src/js/*.js')
+    .pipe(concat('main.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+}); 
+
  // only gulp -- because of default arg
  // compile all task at once
- gulp.task('default', ['message', 'copyhtml', 'imageMin', 'minify', 'sass']);
+ gulp.task('default', ['message', 'copyhtml', 'imageMin', 'sass', 'scripts']);
