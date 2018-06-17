@@ -59,3 +59,11 @@ gulp.task('scripts', () => {
  // only gulp -- because of default arg
  // compile all task at once
  gulp.task('default', ['message', 'copyhtml', 'imageMin', 'sass', 'scripts']);
+
+ // watch file changes
+ gulp.task('watch', () => {
+  gulp.watch('src/js/*.js', ['scripts']);
+  gulp.watch('src/images/*', ['imageMin']);
+  gulp.watch('src/sass/*.scss', ['sass']);
+  gulp.watch('src/*.html', ['copyhtml']);
+ });
