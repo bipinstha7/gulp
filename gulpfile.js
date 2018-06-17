@@ -18,10 +18,6 @@
  gulp.task('message', () => {
    return console.log('gulp is running...');
  });
- // only gulp -- because of default arg
-//  gulp.task('default', () => {
-//   return console.log('gulp is running...');
-// });
 
 
 // copy all html files
@@ -50,3 +46,7 @@ gulp.task('sass', () => {
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('dist/css'));
 });
+
+ // only gulp -- because of default arg
+ // compile all task at once
+ gulp.task('default', ['message', 'copyhtml', 'imageMin', 'minify', 'sass']);
