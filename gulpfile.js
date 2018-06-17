@@ -48,5 +48,5 @@ gulp.task('minify', () => {
 gulp.task('sass', () => {
   gulp.src('src/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('/dist/css'));
+    .pipe(gulp.dest('dist/css'));
 });
