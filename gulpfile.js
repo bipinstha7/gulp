@@ -1,5 +1,6 @@
  const gulp = require('gulp');
  const imagemin = require('gulp-imagemin');
+ const uglify = require('gulp-uglify');
 
  /*
  --- TOP LEVEL FUNCTIONS ---
@@ -17,9 +18,9 @@
    return console.log('gulp is running...');
  });
  // only gulp -- because of default arg
- gulp.task('default', () => {
-  return console.log('gulp is running...');
-});
+//  gulp.task('default', () => {
+//   return console.log('gulp is running...');
+// });
 
 
 // copy all html files
@@ -28,3 +29,16 @@ gulp.task('copyhtml', () => {
     .pipe(gulp.dest('dist'));
 });
 
+// optimize images
+gulp.task('imageMin', () =>
+    gulp.src('src/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'))
+);
+
+// minify js
+gulp.task('minify', () => {
+  gulp.src('src/js/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'));
+});
